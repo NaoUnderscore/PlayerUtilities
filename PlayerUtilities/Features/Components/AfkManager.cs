@@ -25,6 +25,7 @@ namespace PlayerUtilities.Features.Components
             {
                 _lastPos = _player.Position;
                 _lastRot = _player.Rotation;
+                _afkTime = 0;
                 return;
             }
 
@@ -35,6 +36,10 @@ namespace PlayerUtilities.Features.Components
                 if (MainClass.Cfg.AfkChecker.ReplaceOptions.ShouldReplace)
                 {
                     var newPly = Player.Get(Team.RIP).GetRandom();
+
+                    if(newPly == null)
+                        return;
+                    
                     _player.ReplaceWith(newPly);
 
                     if (!string.IsNullOrWhiteSpace(MainClass.Cfg.AfkChecker.ReplaceOptions.ReplaceMessage))

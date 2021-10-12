@@ -22,6 +22,10 @@ namespace PlayerUtilities
             if (MainClass.Cfg.DisconnectReplace.ReplaceOptions.ShouldReplace && Round.IsStarted && !RoundSummary.singleton.RoundEnded && (ev.Player.Role != RoleType.Tutorial || !MainClass.Cfg.DisconnectReplace.IgnoreTutorials))
             {
                 var newPly = Player.Get(Team.RIP).GetRandom();
+                
+                if(newPly == null)
+                    return;
+                
                 ev.Player.ReplaceWith(newPly);
                 
                 if (!string.IsNullOrWhiteSpace(MainClass.Cfg.DisconnectReplace.ReplaceOptions.ReplaceMessage))

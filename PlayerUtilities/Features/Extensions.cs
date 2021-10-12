@@ -35,7 +35,7 @@ namespace PlayerUtilities.Features
         public static Player GetRandom(this IEnumerable<Player> playerList)
         {
             var list = playerList.ToList();
-            return list[Random.Range(0, list.Count)];
+            return list.Count > 0 ? list[Random.Range(0, list.Count)] : null;
         }
     }
 }
