@@ -8,7 +8,7 @@ namespace PlayerUtilities
         public override string Author { get; } = "Jesus-QC";
         public override string Name { get; } = "PlayerUtilities";
         public override string Prefix { get; } = "PlayerUtilities";
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 0, 1);
         public override Version RequiredExiledVersion { get; } = new Version(3, 0, 5);
 
         public static MainConfig Cfg { get; private set; }
