@@ -9,7 +9,6 @@ namespace PlayerUtilities.Features.Components
     public class AfkManager : MonoBehaviour
     {
         private float _afkTime;
-        private int _timesAfk;
 
         private Player _player;
         private Vector3 _lastPos = Vector3.zero;
