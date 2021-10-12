@@ -54,12 +54,14 @@ namespace PlayerUtilities.Features.Components
                 {
                     _player.Kick("[SRV MOD]" + MainClass.Cfg.AfkChecker.Actions.ActionMsg);
                 }
+
+                _afkTime = 0;
                 return;
             }
 
             if (MainClass.Cfg.AfkChecker.Actions.ShowCounter && _afkTime > MainClass.Cfg.AfkChecker.AfkTime - 10)
             {
-                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("", "a"), shouldClearPrevious:true);
+                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("{seconds_left}", $"{MainClass.Cfg.AfkChecker.AfkTime - _afkTime}"), shouldClearPrevious:true);
             }
         }
     }
