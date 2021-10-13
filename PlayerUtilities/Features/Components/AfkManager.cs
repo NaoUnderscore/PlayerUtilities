@@ -73,7 +73,7 @@ namespace PlayerUtilities.Features.Components
             
             if (_counterTime > 1)
             {
-                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("{seconds_left}", $"{MainClass.Cfg.AfkChecker.AfkTime - _afkTime}"), shouldClearPrevious: true);
+                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("{seconds_left}", $"{(int)(MainClass.Cfg.AfkChecker.AfkTime - _afkTime)}"), shouldClearPrevious: true);
                 _counterTime = 0;
             }
             else

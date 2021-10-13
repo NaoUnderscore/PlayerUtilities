@@ -22,18 +22,24 @@ namespace PlayerUtilities.Features
                 return;
             }
 
+            var oldHealth = oldPlayer.Health;
+            var oldAhp = oldPlayer.ArtificialHealth;
+            var oldItems = oldPlayer.Items;
+            var oldAmmo = oldPlayer.Ammo;
+            var oldPos = oldPlayer.Position;
+            
             Timing.CallDelayed(0.5f, () =>
             {
-                newPlayer.Health = oldPlayer.Health;
-                newPlayer.ArtificialHealth = oldPlayer.ArtificialHealth;
+                newPlayer.Health = oldHealth;
+                newPlayer.ArtificialHealth = oldAhp;
 
                 newPlayer.ClearInventory();
-                foreach (var item in oldPlayer.Items)
+                foreach (var item in oldItems)
                     newPlayer.AddItem(item.Type);
-                foreach (var ammo in oldPlayer.Ammo)
+                foreach (var ammo in oldAmmo)
                     newPlayer.Ammo[ammo.Key] = ammo.Value;
 
-                newPlayer.Position = oldPlayer.Position;
+                newPlayer.Position = oldPos;
             });
         }
 
