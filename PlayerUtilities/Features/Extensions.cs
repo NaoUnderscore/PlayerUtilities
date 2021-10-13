@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Exiled.API.Features;
+using MEC;
 using UnityEngine;
 
 namespace PlayerUtilities.Features
@@ -20,16 +21,20 @@ namespace PlayerUtilities.Features
                 newPlayer.Energy = oldPlayer.Energy;
                 return;
             }
-            
-            newPlayer.Position = oldPlayer.Position;
-            newPlayer.Health = oldPlayer.Health;
-            newPlayer.ArtificialHealth = oldPlayer.ArtificialHealth;
 
-            newPlayer.ClearInventory();
-            foreach (var item in oldPlayer.Items)
-                newPlayer.AddItem(item.Type);
-            foreach (var ammo in oldPlayer.Ammo)
-                newPlayer.Ammo[ammo.Key] = ammo.Value;
+            Timing.CallDelayed(0.5f, () =>
+            {
+                newPlayer.Health = oldPlayer.Health;
+                newPlayer.ArtificialHealth = oldPlayer.ArtificialHealth;
+
+                newPlayer.ClearInventory();
+                foreach (var item in oldPlayer.Items)
+                    newPlayer.AddItem(item.Type);
+                foreach (var ammo in oldPlayer.Ammo)
+                    newPlayer.Ammo[ammo.Key] = ammo.Value;
+
+                newPlayer.Position = oldPlayer.Position;
+            });
         }
 
         public static Player GetRandom(this IEnumerable<Player> playerList)

@@ -14,6 +14,8 @@ namespace PlayerUtilities.Features.Components
         private Vector3 _lastPos = Vector3.zero;
         private Vector3 _lastRot = Vector2.zero;
 
+        private float _counterTime;
+        
         public void Awake() => _player = Player.Get(gameObject);
 
         public void Update()
@@ -54,6 +56,9 @@ namespace PlayerUtilities.Features.Components
                 if (MainClass.Cfg.AfkChecker.Actions.SetSpectator)
                 {
                     _player.SetRole(RoleType.Spectator);
+                    if(!string.IsNullOrEmpty(MainClass.Cfg.AfkChecker.Actions.ActionMsg))
+                        _player.Broadcast(5, MainClass.Cfg.AfkChecker.Actions.ActionMsg);
+                    
                 }
                 else
                 {
@@ -64,10 +69,15 @@ namespace PlayerUtilities.Features.Components
                 return;
             }
 
-            if (MainClass.Cfg.AfkChecker.Actions.ShowCounter && _afkTime > MainClass.Cfg.AfkChecker.AfkTime - 10)
+            if (!MainClass.Cfg.AfkChecker.Actions.ShowCounter || _afkTime < MainClass.Cfg.AfkChecker.AfkTime - 10) return;
+            
+            if (_counterTime > 1)
             {
-                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("{seconds_left}", $"{MainClass.Cfg.AfkChecker.AfkTime - _afkTime}"), shouldClearPrevious:true);
+                _player.Broadcast(1, MainClass.Cfg.AfkChecker.Actions.CounterMsg.Replace("{seconds_left}", $"{MainClass.Cfg.AfkChecker.AfkTime - _afkTime}"), shouldClearPrevious: true);
+                _counterTime = 0;
             }
+            else
+                _counterTime += Time.deltaTime;
         }
     }
 }
