@@ -13,7 +13,7 @@ namespace PlayerUtilities
 
         public void OnLeft(LeftEventArgs ev)
         {
-            if (!_afkManagers.ContainsKey(ev.Player))
+            if (_afkManagers.ContainsKey(ev.Player))
             {
                 Object.Destroy(_afkManagers[ev.Player]);
                 _afkManagers.Remove(ev.Player);
