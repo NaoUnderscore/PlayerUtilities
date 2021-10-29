@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Exiled.API.Features;
 using Exiled.Events.EventArgs;
 using PlayerUtilities.Features;
